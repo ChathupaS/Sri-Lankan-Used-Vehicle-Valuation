@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  // 1. Setup State for the API dropdown options
   const [options, setOptions] = useState({
     brands: [],
-    brand_model_map: {}, // NEW: Store the dictionary mapping
+    brand_model_map: {},
     transmissions: [],
     fuel_types: []
   });
 
-  // 2. Setup State for the User's Input
   const [formData, setFormData] = useState({
     brand: 'Toyota',
     car_model: 'Premio',
@@ -24,7 +22,6 @@ function App() {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // 3. Fetch the available car options from FastAPI on page load
   useEffect(() => {
     const fetchOptions = async () => {
       try {
@@ -38,11 +35,9 @@ function App() {
     fetchOptions();
   }, []);
 
-  // Handle typing/selecting in the form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     
-    // If the user changes the Brand, we must reset the Model to fit the new Brand!
     if (name === 'brand') {
       const availableModelsForNewBrand = options.brand_model_map[value] || [];
       setFormData({ 
@@ -51,7 +46,6 @@ function App() {
         car_model: availableModelsForNewBrand.length > 0 ? availableModelsForNewBrand[0] : '' 
       });
     } else {
-      // Standard update for all other inputs
       setFormData({ ...formData, [name]: value });
     }
   };
@@ -109,7 +103,6 @@ function App() {
 
           <div className="form-group">
             <label>Specific Model</label>
-            {/* Update this select mapping to use currentAvailableModels */}
             <select name="car_model" className="form-control" value={formData.car_model} onChange={handleInputChange}>
               {currentAvailableModels.map(model => (
                 <option key={model} value={model}>{model}</option>
@@ -157,7 +150,6 @@ function App() {
         </button>
       </form>
 
-      {/* 5. Display the Results and the SHAP XAI Graph */}
       {result && (
         <div className="result-card">
           <h2>Estimated Market Value</h2>
