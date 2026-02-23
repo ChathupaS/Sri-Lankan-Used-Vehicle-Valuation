@@ -75,7 +75,34 @@ def predict_price(car: CarInput):
     if fuel_col in input_df.columns:
         input_df[fuel_col] = 1
         
-    prediction = model.predict(input_df)[0]
+    prediction = model.predict(input_df)[0].item()
+    
+    margin = prediction * 0.08
+    lower_bound = prediction - margin
+    upper_bound = prediction + margin
+    
+    input_df_future = input_df.copy()
+    if 'Year of Manufacture' in input_df_future.columns:
+        input_df_future['Year of Manufacture'] = car.year - 1
+    if 'Mileage' in input_df_future.columns:
+        input_df_future['Mileage'] = car.mileage + 15000
+        
+    future_prediction = model.predict(input_df_future)[0].item()
+    
+    comps_df = df[(df['Brand'] == car.brand) & (df['Model'] == car.car_model)].copy()
+    comps = []
+    
+    if not comps_df.empty:
+        comps_df['similarity'] = abs(comps_df['Year of Manufacture'] - car.year) * 15000 + abs(comps_df['Mileage'] - car.mileage)
+        top_comps = comps_df.sort_values('similarity').head(3)
+        
+        for _, row in top_comps.iterrows():
+            comps.append({
+                "year": int(row['Year of Manufacture']),
+                "mileage": float(row['Mileage']),
+                "price": float(row['Selling Price']),
+                "transmission": str(row['Transmission'])
+            })
     
     input_df_shap = input_df.astype(float)
     explainer = shap.TreeExplainer(model)
@@ -91,6 +118,10 @@ def predict_price(car: CarInput):
     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
     
     return {
-        "predicted_price": float(prediction),
+        "predicted_price": prediction,
+        "lower_bound": lower_bound,
+        "upper_bound": upper_bound,
+        "future_price": future_prediction,
+        "comps": comps,
         "shap_image_base64": img_base64
     }
