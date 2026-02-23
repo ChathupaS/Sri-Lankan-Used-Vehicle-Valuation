@@ -1,0 +1,203 @@
+.result-card {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 50px rgba(40, 167, 69, 0.1);
+  border-top: 6px solid #28a745;
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 0;
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.result-header h2 {
+  margin-top: 0;
+  color: #6c757d;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.price-display {
+  color: #28a745;
+  font-size: 2.8rem;
+  margin: 10px 0 15px 0;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(40, 167, 69, 0.2);
+}
+
+.fair-market-range {
+  font-size: 1.25rem;
+  color: #495057;
+  margin: 0;
+  font-weight: 600;
+  background: #f8f9fa;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  border: 1px solid #e9ecef;
+}
+
+.depreciation-box {
+  background: linear-gradient(to right, #fff8e1, #fff3cd);
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin: 30px 0;
+  border-left: 5px solid #ffc107;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+}
+
+.depreciation-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.depreciation-content h4 {
+  margin: 0 0 8px 0;
+  color: #856404;
+  font-size: 1.1rem;
+}
+
+.depreciation-content p {
+  margin: 0;
+  color: #664d03;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.comps-section {
+  margin: 40px 0;
+}
+
+.comps-section h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.3rem;
+  color: #343a40;
+}
+
+.comps-subtitle {
+  color: #6c757d;
+  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+}
+
+.comps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.comp-card {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: #dee2e6;
+}
+
+.comp-title {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  color: #212529;
+}
+
+.comp-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.comp-price {
+  color: #28a745;
+  font-size: 1.3rem;
+  display: block;
+  padding-top: 12px;
+  border-top: 1px dashed #dee2e6;
+}
+
+.divider {
+  margin: 40px 0;
+  border: 0;
+  border-top: 1px solid #e9ecef;
+}
+
+.shap-section {
+  text-align: center;
+}
+
+.shap-section h3 {
+  color: #343a40;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.shap-description {
+  color: #6c757d;
+  margin-bottom: 25px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shap-image-container {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.shap-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .result-card {
+    padding: 25px;
+  }
+
+  .price-display {
+    font-size: 2.5rem;
+  }
+
+  .depreciation-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
